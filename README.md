@@ -115,9 +115,9 @@ Once the application starts, you will see the following menu in the console:
 
 ================= Library Management System =================
 
-Add Book
-Exit
-Enter your choice:
+- Add Book
+- Exit
+- Enter your choice:
 
 
 ### 📘 Add a Book
