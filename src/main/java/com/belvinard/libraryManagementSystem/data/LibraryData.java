@@ -1,12 +1,15 @@
 package com.belvinard.libraryManagementSystem.data;
 
 import com.belvinard.libraryManagementSystem.model.Book;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
 /**
  * Data access class for managing the book collection.
  * Acts as a simple in-memory storage for books in the library.
  */
+@Component
 public class LibraryData {
 
     // List to store Book objects as an in-memory collection
