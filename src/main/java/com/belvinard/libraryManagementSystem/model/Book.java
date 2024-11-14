@@ -107,4 +107,8 @@ public class Book {
     public int getPublicationYear() {
         return publicationYear;
     }
+
+    public String getAuthor() {
+        return author;
+    }
 }

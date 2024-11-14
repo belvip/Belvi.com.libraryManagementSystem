@@ -205,6 +205,9 @@ public class ConsoleHandler {
                     System.out.println("Invalid choice. Please try again.");
                     break;
             }
+
+            // Display the updated book information after each update
+            displayUpdatedBookInfo(existingBook);
         }
 
         // Save the updated book details
@@ -225,6 +228,16 @@ public class ConsoleHandler {
             }
         }
         return input;
+    }
+
+    // Helper method to display the updated book information
+    private void displayUpdatedBookInfo(Book updatedBook) {
+        System.out.println("Updated Book Details:");
+        System.out.println("Title: " + updatedBook.getTitle());
+        System.out.println("Author: " + updatedBook.getAuthor());
+        System.out.println("Genre: " + updatedBook.getGenre());
+        System.out.println("ISBN: " + updatedBook.getISBN());
+        System.out.println("Publication Year: " + updatedBook.getPublicationYear());
     }
 
 
