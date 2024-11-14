@@ -130,7 +130,6 @@ public class ConsoleHandler {
             return;
         }
 
-
         // Retrieve the existing book to update specific fields
         Book existingBook = bookService.getBookByISBN(isbn);
 
@@ -208,12 +207,32 @@ public class ConsoleHandler {
 
             // Display the updated book information after each update
             displayUpdatedBookInfo(existingBook);
+
+            // Prompt the user if they want to continue updating or return to the menu
+            System.out.println("Do you want to continue updating the book?");
+            System.out.println("1. Yes, update more fields.");
+            System.out.println("2. No, Exiting the system.");
+            System.out.print("Enter your choice: ");
+            int continueChoice;
+            try {
+                continueChoice = Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
+
+            if (continueChoice == 2) {
+                // User chooses to return to the main menu
+                System.out.println("Returning to main menu...");
+                return;  // Exit the updateBook method and return to the main menu
+            }
         }
 
         // Save the updated book details
         bookService.updateBook(isbn, existingBook);
         System.out.println("Book updated successfully.");
     }
+
 
     // Helper method to validate user input based on a custom condition
     private String getValidInput(String prompt, Predicate<String> validationCondition) {
@@ -239,6 +258,12 @@ public class ConsoleHandler {
         System.out.println("ISBN: " + updatedBook.getISBN());
         System.out.println("Publication Year: " + updatedBook.getPublicationYear());
     }
+
+
+
+
+
+
 
 
 }

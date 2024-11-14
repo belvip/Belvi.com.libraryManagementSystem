@@ -84,11 +84,11 @@ public class Book {
     public void setGenre(String genre) {
         Set<String> allowedGenres = new HashSet<>(Arrays.asList("Data Structures", "Software Development", "Java", "Python", "JavaScript", "Databases", "Software Architecture & Design", "Biography", "History"));
         if (genre == null || allowedGenres.stream()
-            .noneMatch(allowedGenre -> allowedGenre.equalsIgnoreCase(genre))) {
-        throw new IllegalArgumentException(
-            "Invalid genre. It must be one of: " + String.join(", ", allowedGenres)
-        );
-    }
+                .noneMatch(allowedGenre -> allowedGenre.equalsIgnoreCase(genre))) {
+            throw new IllegalArgumentException(
+                    "Invalid genre. It must be one of: " + String.join(", ", allowedGenres)
+            );
+        }
         this.genre = genre;
     }
 
