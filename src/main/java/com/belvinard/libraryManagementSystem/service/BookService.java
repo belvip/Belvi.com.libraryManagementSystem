@@ -15,10 +15,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookService {
 
-    private static final Logger logger = LoggerFactory.getLogger(BookService.class);
-
     // Dependency on LibraryData, which manages data storage for books
     private final LibraryData libraryData;
+    private Book[] bookCollection;
 
     /**
      * Constructor-based dependency injection.
@@ -28,6 +27,11 @@ public class BookService {
      */
     @Autowired
     public BookService(LibraryData libraryData) {
+
+        if (libraryData == null) {
+            throw new IllegalArgumentException("LibraryData cannot be null.");
+        }
+
         this.libraryData = libraryData;
     }
 
@@ -41,4 +45,35 @@ public class BookService {
         libraryData.addBook(book);  // Delegate book addition to the data layer
 
     }
+
+    public void updateBook(String isbn, Book updatedBook) {
+        libraryData.updateBook(isbn, updatedBook);
+    }
+
+    /*public boolean bookExists(String isbn) {
+        return libraryData.getBookCollection().stream().anyMatch(book -> book.getISBN().equals(isbn));
+    }*/
+
+    // Method to check if a book exists by ISBN (delegating to LibraryData)
+    public boolean bookExists(String isbn) {
+        return libraryData.bookExists(isbn);
+    }
+
+
+    // Method to get a book by ISBN
+    public Book getBookByISBN(String isbn) {
+        if (isbn == null || isbn.trim().isEmpty()) {
+            throw new IllegalArgumentException("ISBN must not be null or empty.");
+        }
+
+        // Use libraryData's bookCollection to search for the book
+        for (Book book : libraryData.getBookCollection()) {
+            if (book.getISBN().equals(isbn)) {
+                return book; // Book found
+            }
+        }
+
+        return null; // Book not found
+    }
+
 }

@@ -2,6 +2,7 @@ package com.belvinard.libraryManagementSystem.model;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -59,12 +60,51 @@ public class Book {
         this.publicationYear = publicationYear;
     }
 
-    // Genre Validation
-    public void setGenre(String genre) {
-        Set<String> allowedGenres = new HashSet<>(Arrays.asList("Fiction", "Non-Fiction", "Fantasy", "Science Fiction", "Biography", "History"));
-        if (genre == null || !allowedGenres.contains(genre.trim())) {
-            throw new IllegalArgumentException("Invalid genre. It must be one of: Fiction, Non-Fiction, Fantasy, Science Fiction, Biography, History.");
+    /*public void setGenre(String genre) {
+        // Define the allowed genres in a list
+        List<String> allowedGenres = Arrays.asList(
+                "Data Structures", "Software Development", "Java", "Python",
+                "JavaScript", "Databases", "Software Architecture & Design",
+                "Biography", "History"
+        );
+
+        // Validate genre: Convert genre to lowercase for case-insensitive checking
+        if (genre == null || allowedGenres.stream()
+                .noneMatch(allowedGenre -> allowedGenre.equalsIgnoreCase(genre))) {
+            throw new IllegalArgumentException(
+                    "Invalid genre. It must be one of: " + String.join(", ", allowedGenres)
+            );
         }
         this.genre = genre;
+    }*/
+
+
+
+    // Genre Validation
+    public void setGenre(String genre) {
+        Set<String> allowedGenres = new HashSet<>(Arrays.asList("Data Structures", "Software Development", "Java", "Python", "JavaScript", "Databases", "Software Architecture & Design", "Biography", "History"));
+        if (genre == null || allowedGenres.stream()
+            .noneMatch(allowedGenre -> allowedGenre.equalsIgnoreCase(genre))) {
+        throw new IllegalArgumentException(
+            "Invalid genre. It must be one of: " + String.join(", ", allowedGenres)
+        );
+    }
+        this.genre = genre;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public int getPublicationYear() {
+        return publicationYear;
     }
 }
